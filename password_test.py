@@ -35,4 +35,11 @@ class TestPassword(unittest.TestCase):
         self.new_password.save_password()
         self.assertEqual(len(Password.my_password),1)
 
-    
+    def tearDown(self):
+        """
+        tearDown method that does clean up after each test case has run
+        """
+        Password.my_password = []
+
+
+   
