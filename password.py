@@ -42,4 +42,18 @@ class Password:
             if password.web_site == website:
                 return password
        
+    @classmethod
+    def password_exists(cls,website):
+        """
+        Method that checks if a password credential exists from the password list
+
+        Args:
+            website ([Boolean]): True or false depanding if the password exists
+        """
+        for password in cls.my_password:
+            if password.web_site == website:
+                return True
+
+        return False
+
     
