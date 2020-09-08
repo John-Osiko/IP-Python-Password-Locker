@@ -28,4 +28,11 @@ class TestPassword(unittest.TestCase):
         self.assertEqual(self.new_password.user_name, "johnmaxosiko@gmail.com")
         self.assertEqual(self.new_password.user_password, "projecttest1")
 
+    def test_save_password(self):
+        """
+        test_save_password case to test if the password object is saved into the password list
+        """
+        self.new_password.save_password()
+        self.assertEqual(len(Password.my_password),1)
+
     
