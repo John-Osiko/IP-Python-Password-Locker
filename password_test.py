@@ -51,4 +51,16 @@ class TestPassword(unittest.TestCase):
         test_password.save_password()
         self.assertEqual(len(Password.my_password),2)
 
+    def test_password_exists(self):
+        """
+        test to check if we can return a Boolean if we cannot find the password
+        """
+        self.new_password.save_password()
+        test_password = Password("Page", "name1", "name2", "username", "testuser")
+        test_password.save_password()
+
+        password_exists = Password.password_exists("username")
+
+        self.assertTrue(password_exists)
+
     
