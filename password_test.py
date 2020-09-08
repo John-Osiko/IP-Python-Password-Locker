@@ -11,4 +11,11 @@ class TestPassword(unittest.TestCase):
         unittest : TestCase class that helps in creating test cases
     """
 
-   
+    def setUp(self):
+        """
+        Set up method to run before each test cases
+        """
+        self.new_password = Password("Evernote", "John", "Osiko", "johnmaxosiko@gmail.com", "projecttest1")
+
+
+    
