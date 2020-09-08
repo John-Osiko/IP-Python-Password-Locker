@@ -81,4 +81,14 @@ class TestPassword(unittest.TestCase):
         self.assertEqual(self.new_password.user_password,pyperclip.paste())
 
 
+    def test_delete_password(self):
+        """
+        test_delete_password to test if we can remove a password from our password list
+        """
+        self.new_password.save_password()
+        test_password = Password("Page", "name1", "name2", "username", "testuser")
+        test_password.save_password()
+        self.new_password.delete_password()
+        self.assertEqual(len(Password.my_password),1)
+
     
