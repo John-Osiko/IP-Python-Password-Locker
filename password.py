@@ -13,4 +13,12 @@ class Password:
         self.user_name = user_name
         self.user_password = user_password
 
+    def save_password(self):
+    
+        """
+        save_password method saves password objects into my_password
+        """
+
+        Password.my_password.append(self)
+
     
