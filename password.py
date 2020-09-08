@@ -56,4 +56,14 @@ class Password:
 
         return False
 
-    
+    @classmethod
+    def display_passwords(cls):
+        """
+        method that returns the password list
+        """
+        return cls.my_password
+
+    @classmethod
+    def copy_user_password(cls,website):
+        password_found = Password.find_by_website(website)
+        pyperclip.copy(password_found.user_password)
