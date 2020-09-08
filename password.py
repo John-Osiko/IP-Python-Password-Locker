@@ -21,4 +21,10 @@ class Password:
 
         Password.my_password.append(self)
 
+    def delete_password(self):
+        """
+        delete_password method deletes a saved password
+        """
+        Password.my_password.remove(self)
+
     
