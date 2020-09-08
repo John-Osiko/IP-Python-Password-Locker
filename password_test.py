@@ -42,4 +42,13 @@ class TestPassword(unittest.TestCase):
         Password.my_password = []
 
 
-   
+    def test_save__multiple_password(self):
+        """
+        test_save_multiple_password to check if we can save multiple passwords to our my_password
+        """
+        self.new_password.save_password()
+        test_password = Password("Page", "name1", "name2", "username", "testuser")
+        test_password.save_password()
+        self.assertEqual(len(Password.my_password),2)
+
+    
