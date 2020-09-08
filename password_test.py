@@ -91,4 +91,14 @@ class TestPassword(unittest.TestCase):
         self.new_password.delete_password()
         self.assertEqual(len(Password.my_password),1)
 
-    
+    def test_find_password_credentials_by_website(self):
+        """
+        test to check if we can find a password credential by website and display in formation 
+        """
+        self.new_password.save_password()
+        test_password = Password("Page", "name1", "name2", "username", "testuser")
+        test_password.save_password()
+        password_found = Password.find_by_website("website")
+        self.assertEqual(password_found.user_password,test_password.user_password)
+
+
