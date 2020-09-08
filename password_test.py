@@ -102,3 +102,5 @@ class TestPassword(unittest.TestCase):
         self.assertEqual(password_found.user_password,test_password.user_password)
 
 
+if __name__ == '__main__':
+    unittest.main()
