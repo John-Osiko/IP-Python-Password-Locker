@@ -20,7 +20,7 @@ class TestUser(unittest.TestCase):
 
     def test_init(self):
         """
-        test__init test case to test if the my_password object is initialized properly
+        test__init test case to test if the user_info object is initialized properly
         """
         self.assertEqual(self.new_password.web_site, "Evernote")
         self.assertEqual(self.new_password.first_name, "John")
@@ -33,23 +33,23 @@ class TestUser(unittest.TestCase):
         test_save_password case to test if the password object is saved into the password list
         """
         self.new_password.save_password()
-        self.assertEqual(len(User.my_password),1)
+        self.assertEqual(len(User.user_info),1)
 
     def tearDown(self):
         """
         tearDown method that does clean up after each test case has run
         """
-        User.my_password = []
+        User.user_info = []
 
 
     def test_save__multiple_password(self):
         """
-        test_save_multiple_password to check if we can save multiple passwords to our my_password
+        test_save_multiple_password to check if we can save multiple passwords to our user_info
         """
         self.new_password.save_password()
         test_password = User("Page", "name1", "name2", "username", "testuser")
         test_password.save_password()
-        self.assertEqual(len(User.my_password),2)
+        self.assertEqual(len(User.user_info),2)
 
     def test_password_exists(self):
         """
@@ -68,7 +68,7 @@ class TestUser(unittest.TestCase):
         method that returns a list of all passwords saved
         """
 
-        self.assertEqual(User.display_passwords(),User.my_password)
+        self.assertEqual(User.display_passwords(),User.user_info)
 
     def test_copy_username(self):
         """
@@ -89,7 +89,7 @@ class TestUser(unittest.TestCase):
         test_password = User("Page", "name1", "name2", "username", "testuser")
         test_password.save_password()
         self.new_password.delete_password()
-        self.assertEqual(len(User.my_password),1)
+        self.assertEqual(len(User.user_info),1)
 
     def test_get_user_into_by_username(self):
         """
