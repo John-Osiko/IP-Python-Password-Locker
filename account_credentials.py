@@ -3,7 +3,7 @@ import string
 import pyperclip
 
 
-class Credential:
+class Credentials:
     '''
     Class that stores user accounts and credentials
     '''
