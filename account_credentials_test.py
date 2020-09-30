@@ -1,6 +1,6 @@
 import unittest
 import uuid
-from account_credentials import Credential
+from account_credentials import Credentials
 
 class TestCredential(unittest.TestCase):
     """
@@ -14,16 +14,16 @@ class TestCredential(unittest.TestCase):
         """
         Set up method to run before each test cases
         """
-        self.new_credential = Credential("Evernote","Clipper", "projecttest1")
+        self.new_credential = Credentials("Evernote", "Clipper", "projecttest1")
 
 
     def test_init(self):
         """
-        test_init test case is to test if the my_account object is initialized properly
+        test_init test case is to test if the accounts object is initialized properly
         """
-        self.assertEqual(self.new_credential.web_site, "Evernote")
-        self.assertEqual(self.new_credential.user_name, "Clipper")
-        self.assertEqual(self.new_credential.user_password, "projecttest1")
+        self.assertEqual(self.new_credential.platform, "Evernote")
+        self.assertEqual(self.new_credential.username, "Clipper")
+        self.assertEqual(self.new_credential.password, "projecttest1")
 
 
     def test_save_credential(self):
@@ -31,44 +31,44 @@ class TestCredential(unittest.TestCase):
         test_save_credential case is to test if the credential object is saved into our credentials list
         """
         self.new_credential.save_credential()
-        self.assertEqual(len(Credential.my_account), 1)
+        self.assertEqual(len(Credentials.accounts), 1)
 
     def test_delete_account(self):
         """
         test_delete case is to test if we can remove an account from our credentials list
         """
         self.new_credential.save_credential()
-        test_credential = Credential("Facebook","Dripper Clipper", "testproject2")
+        test_credential = Credentials("Facebook", "Dripper Clipper", "testproject2")
         test_credential.save_credential()
         self.new_credential.delete_account()
-        self.assertEqual(len(Credential.my_account), 1)
+        self.assertEqual(len(Credentials.accounts), 1)
 
-    def test_display_account(self):
+    def test_list_all_credentials(self):
         """
         method that returns a list of all passwords saved
         """
 
-        self.assertEqual(Credential.display_account(), Credential.my_account)
+        self.assertEqual(Credentials.display_account(), Credentials.accounts)
 
-    def test_find_password_credentials_by_website(self):
+    def test_find_password_credentials_by_username(self):
         """
         test to check if we can find a password credential by website and display in formation 
         """
         self.new_credential.save_credential()
-        test_credential = Credential("Facebook", "Dripper Clipper", "testproject2")
+        test_credential = Credentials("Facebook", "Dripper Clipper", "testproject2")
         test_credential.save_credential()
-        account_found = Credential.find_by_website("website")
-        self.assertEqual(account_found.web_site, test_credential.user_password)
+        account_found = Credentials.get_account("johnny")
+        self.assertEqual(account_found.username, test_credential.password)
 
     def test_account_exists(self):
         """
         test to check if we can return a Boolean if we cannot find the password
         """
         self.new_credential.save_credential()
-        test_credential = Credential("Facebook", "Dripper Clipper", "testproject2")
+        test_credential = Credentials("Facebook", "Dripper Clipper", "testproject2")
         test_credential.save_credential()
 
-        account_exists = Credential.account_exists("username")
+        account_exists = Credentials.account_exist("username")
 
         self.assertTrue(account_exists)
 
@@ -78,7 +78,7 @@ class TestCredential(unittest.TestCase):
         method that returns a list of all contacts saved
         """
 
-        self.assertEqual(Credential.display_credentials(), Credential.my_account)
+        self.assertEqual(Credentials.display_credentials(), Credentials.accounts)
 
 
 
