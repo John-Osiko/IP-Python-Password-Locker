@@ -3,6 +3,7 @@ import pyperclip
 from account_credentials import Credentials
 
 
+
 def new_user_account():
     print('Create New user account')
     usr_firstname = input('Enter First Name: ')
@@ -15,21 +16,20 @@ def new_user_account():
         usr_password = input('Type your login password: ')
         usr_password1 = input('Confirm your login password: ')
         if usr_password == usr_password1:
-            new_User = User(usr_firstname, usr_lastname,
-                            usr_username, usr_password)
+            new_User = User(usr_firstname, usr_lastname,usr_username, usr_password)
             User.save_user_info(new_User)
             print(f'{usr_firstname} added as user\n---------')
             login_account()
 
 
 def login_account():
-    print("-------Login-------")
+    print("-------Log in-------")
     exists = User.user_login(input('Enter Username: '),
                              input('Enter Password: '))
     if(exists != True):
-        print('Check your password!')
+        print('Invalid input.Check your password!')
     else:
-        acc_short_code = input('Hello, if you want to:\n add an existing platform acccount, type EX. \nIf you want to generate new account details, type NW').lower()
+        acc_short_code = input('Hello, if you want to:\n add an existing platform acccount, type EX. \nIf you want to generate new account details, type NW: ').lower()
         if(acc_short_code == 'nw'):
             reg_new_platform()
         elif acc_short_code == 'ex':
@@ -40,8 +40,7 @@ def login_account():
 
 
 def reg_existing_platform():
-    ex_platform = input(
-        'Enter platform e.g. Facebook,Google, Instagram etc.: ')
+    ex_platform = input('Enter platform e.g. Evernote, Facebook, Google, Instagram etc.: ')
     ex_username = input('Enter account username/email: ')
     if(Credentials.account_exist(ex_platform, ex_username)):
         print('Account on {ex_platform} already registered with username/email {ex_username}')
@@ -54,7 +53,7 @@ def reg_existing_platform():
 
 
 def reg_new_platform():
-    nw_platform = input('Enter platform e.g. Facebook,Google, Instagram etc.: ')
+    nw_platform = input('Enter platform e.g.Evernote, Facebook, Google, Instagram etc.: ')
     nw_username = input('Enter account username: ')
     nw_password = input('Type password or type AUTO to auto-generate password: ')
     if(nw_password == 'auto' or nw_password == 'AUTO'):
@@ -79,15 +78,17 @@ def reg_new_platform():
 
 
 def main():
-    print('Hello! Welcome to credential manager\nUse\n CN to create an new user account\n LG to login to an existing user account')
+    print('Hello! Welcome to Password Locker\nUse\n CN to create an new user account\n LG to login to an existing user account')
     short_code = input().lower()
     if short_code == 'cn':
         new_user_account()
     elif short_code == 'lg':
         login_account()
     else:
-        print('Invalid Option')
+        print('Invalid Option! Did not get that please try again.')
         main()
+
+
 
 
 if __name__ == '__main__':
