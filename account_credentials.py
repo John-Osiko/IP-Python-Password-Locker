@@ -1,60 +1,58 @@
+import random
+import string
+import pyperclip
+
+
 class Credential:
-    def __init__(self, web_site, user_name, user_password):
-        self.web_site = web_site
-        self.user_name = user_name
-        self.user_password = user_password
+    '''
+    Class that stores user accounts and credentials
+    '''
+    accounts = []  # empty list
 
-    my_account = []
+    def __init__(self, platform, username, password):
+        '''
+        this function allows users to store their various account details
+            Args: platform,username,password
+        '''
+        self.platform = platform
+        self.username = username
+        self.password = password
 
-    def save_credential(self):
-        """
-        this is a method that appends the website 
-        """
-        Credential.my_account.append(self)
-
-    def delete_account(self):
-        """
-        this is a method that deletes a selected account
-        """
-        Credential.my_account.remove(self)
-
-    @classmethod
-    def display_account(cls):
-        """
-        method that returns the credentials list
-        """
-        return cls.my_account
+    def add_account(self):
+        '''
+        this function adds accounts to the accounts list
+        '''
+        self.accounts.append(self)
 
     @classmethod
-    def find_by_website(cls, website):
-        """
-        method that takes in a website and returns a password credential that matches that credential
-
-        Args:
-            website: Website name to search for password credentials
-         Returns:
-            Password of person that matches the website
-        """
-
-        for credential in cls.my_account:
-            if credential.web_site == website:
-                return credential
-
-    @classmethod
-    def account_exists(cls, website):
-        """
-        method that checks if a password credential exists from the credentials list
-
-        Args:
-            website ([Boolean]): True or false depending if the credential exists
-        """
-        for credential in cls.my_account:
-            if credential.web_site == website:
+    def account_exist(cls, platform, username):
+        for account in cls.accounts:
+            if account.username == username and account.platform == platform:
                 return True
-       
+            return False
+
     @classmethod
-    def display_credentials(cls):
-        """
-        method that returns the credentials list
-        """
-        return cls.my_account
+    def get_account(cls, platform, username):
+        '''
+        this function searchs for an existing account relative to its username and the platform given
+        '''
+        for account in cls.accounts:
+            if account.username == username and account.platform == platform:
+                return account
+
+    @classmethod
+    def list_all_credentials(cls):
+        '''
+        function that allows users to view their account details
+        '''
+        i = 0
+        for account in cls.accounts:
+            i += 1
+            print(
+                f'  =>{i}. Platform {account.platform} Username: {account.username} password: {account.password}')
+
+    @classmethod
+    def copy_password(cls, username, platform):
+        for account in cls.accounts:
+            if account.username == username and account.platform == platform:
+                return pyperclip.copy(account.password)
