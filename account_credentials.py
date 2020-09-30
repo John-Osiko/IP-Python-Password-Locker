@@ -48,8 +48,7 @@ class Credentials:
         i = 0
         for account in cls.accounts:
             i += 1
-            print(
-                f'  =>{i}. Platform {account.platform} Username: {account.username} password: {account.password}')
+            print(f'  =>{i}. Platform {account.platform} Username: {account.username} password: {account.password}')
 
     @classmethod
     def copy_password(cls, username, platform):
